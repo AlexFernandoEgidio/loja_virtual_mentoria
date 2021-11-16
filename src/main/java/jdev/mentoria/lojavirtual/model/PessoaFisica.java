@@ -1,26 +1,34 @@
 package jdev.mentoria.lojavirtual.model;
 
-import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "marca_produto")
-@SequenceGenerator(name = "seq_marca_produto", sequenceName = "seq_marca_produto", allocationSize = 1, initialValue = 1)
-public class MarcaProduto implements Serializable {
+@Table(name = "pessoa_fisica")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) /* Classe concreta */
+@SequenceGenerator(name = "seq_pessoa_fisica", sequenceName = "seq_pessoa_fisica", allocationSize = 1, initialValue = 1)
+public class PessoaFisica extends Pessoa {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_marca_produto")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_pessoa_fisica")
 	private Long id;
 
-	private String nomeDesc;
+	private String cpf;
+
+	@Temporal(TemporalType.DATE)
+	private Date dataNascimento;
 
 	public Long getId() {
 		return id;
@@ -30,12 +38,20 @@ public class MarcaProduto implements Serializable {
 		this.id = id;
 	}
 
-	public String getNomeDesc() {
-		return nomeDesc;
+	public String getCpf() {
+		return cpf;
 	}
 
-	public void setNomeDesc(String nomeDesc) {
-		this.nomeDesc = nomeDesc;
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 	@Override
@@ -54,7 +70,7 @@ public class MarcaProduto implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MarcaProduto other = (MarcaProduto) obj;
+		PessoaFisica other = (PessoaFisica) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

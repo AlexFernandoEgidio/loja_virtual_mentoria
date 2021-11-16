@@ -1,7 +1,5 @@
 package jdev.mentoria.lojavirtual.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,18 +7,20 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+
 @Entity
-@Table(name = "marca_produto")
-@SequenceGenerator(name = "seq_marca_produto", sequenceName = "seq_marca_produto", allocationSize = 1, initialValue = 1)
-public class MarcaProduto implements Serializable {
+@Table(name = "acesso")
+@SequenceGenerator(name = "seq_acesso", sequenceName = "seq_acesso", allocationSize = 1, initialValue = 1)
+public class Acesso implements GrantedAuthority {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_marca_produto")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_acesso")
 	private Long id;
 
-	private String nomeDesc;
+	private String descricao;
 
 	public Long getId() {
 		return id;
@@ -30,12 +30,12 @@ public class MarcaProduto implements Serializable {
 		this.id = id;
 	}
 
-	public String getNomeDesc() {
-		return nomeDesc;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setNomeDesc(String nomeDesc) {
-		this.nomeDesc = nomeDesc;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	@Override
@@ -54,13 +54,19 @@ public class MarcaProduto implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MarcaProduto other = (MarcaProduto) obj;
+		Acesso other = (Acesso) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	/*Nome do Acesso, ex: ROLE_SECRETARIA, ROLE_ADMIN*/
+	@Override
+	public String getAuthority() {
+		return this.descricao;
 	}
 
 }

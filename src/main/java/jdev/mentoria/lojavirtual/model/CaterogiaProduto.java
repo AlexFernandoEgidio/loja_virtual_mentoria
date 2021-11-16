@@ -2,6 +2,7 @@ package jdev.mentoria.lojavirtual.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,17 +11,18 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "marca_produto")
-@SequenceGenerator(name = "seq_marca_produto", sequenceName = "seq_marca_produto", allocationSize = 1, initialValue = 1)
-public class MarcaProduto implements Serializable {
+@Table(name = "categoria_produto")
+@SequenceGenerator(name = "seq_categoria_produto", sequenceName = "seq_categoria_produto", allocationSize = 1, initialValue = 1)
+public class CaterogiaProduto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_marca_produto")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_categoria_produto")
 	private Long id;
 
-	private String nomeDesc;
+	@Column(nullable = false, name = "nome_desc")
+	private String NomeDescricao;
 
 	public Long getId() {
 		return id;
@@ -30,12 +32,12 @@ public class MarcaProduto implements Serializable {
 		this.id = id;
 	}
 
-	public String getNomeDesc() {
-		return nomeDesc;
+	public String getNomeDescricao() {
+		return NomeDescricao;
 	}
 
-	public void setNomeDesc(String nomeDesc) {
-		this.nomeDesc = nomeDesc;
+	public void setNomeDescricao(String nomeDescricao) {
+		NomeDescricao = nomeDescricao;
 	}
 
 	@Override
@@ -54,7 +56,7 @@ public class MarcaProduto implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MarcaProduto other = (MarcaProduto) obj;
+		CaterogiaProduto other = (CaterogiaProduto) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

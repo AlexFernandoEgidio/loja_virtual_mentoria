@@ -21,7 +21,7 @@ public class ItemVendaLoja implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_conta_receber")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_item_venda_loja")
 	private Long id;
 
 	private Double quantidade;

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -54,6 +55,20 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	
+	@Override
+	protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
+			AuthenticationException failed) throws IOException, ServletException {
+		
+		if (failed instanceof BadCredentialsException) {
+			response.getWriter().write("User e senha não encontrado");
+		}else {
+			response.getWriter().write("Falha ao logar: " + failed.getMessage());
+		}
+		
+		//super.unsuccessfulAuthentication(request, response, failed);
 	}
 
 }

@@ -10,6 +10,7 @@ public class ObjetoErroDTO implements Serializable {
 	
 	private String error;
 	private String code;
+	
 	public String getError() {
 		return error;
 	}

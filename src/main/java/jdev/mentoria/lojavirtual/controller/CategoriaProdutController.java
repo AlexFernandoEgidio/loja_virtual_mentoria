@@ -38,9 +38,13 @@ public class CategoriaProdutController {
 	
 	@ResponseBody /*Poder dar um retorno da API*/
 	@PostMapping(value = "**/deleteCategoria") /*Mapeando a url para receber JSON*/
-	public ResponseEntity<?> deleteAcesso(@RequestBody CategoriaProduto CategoriaProduto) { /*Recebe o JSON e converte pra Objeto*/
+	public ResponseEntity<?> deleteAcesso(@RequestBody CategoriaProduto categoriaProduto) { /*Recebe o JSON e converte pra Objeto*/
 		
-		categoriaProdutoRepository.deleteById(CategoriaProduto.getId());
+		if (categoriaProdutoRepository.findById(categoriaProduto.getId()).isPresent() == false) {
+			return new ResponseEntity("Categoria já foi removida",HttpStatus.OK);
+		}
+		
+		categoriaProdutoRepository.deleteById(categoriaProduto.getId());
 		
 		return new ResponseEntity("Categoria Removida",HttpStatus.OK);
 	}

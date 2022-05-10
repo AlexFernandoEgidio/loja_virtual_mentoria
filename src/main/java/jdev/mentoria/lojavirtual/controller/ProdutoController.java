@@ -36,9 +36,9 @@ public class ProdutoController {
 		}
 		
 		if (produto.getId() == null) {
-		  List<Produto> acessos = produtoRepository.buscarProdutoNome(produto.getNome().toUpperCase(), produto.getEmpresa().getId());
+		  List<Produto> produtos  = produtoRepository.buscarProdutoNome(produto.getNome().toUpperCase(), produto.getEmpresa().getId());
 		  
-		  if (!acessos.isEmpty()) {
+		  if (!produtos.isEmpty()) {
 			  throw new ExceptionMentoriaJava("Já existe Produto com a descrição: " + produto.getNome());
 		  }
 		}

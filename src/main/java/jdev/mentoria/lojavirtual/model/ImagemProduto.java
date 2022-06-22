@@ -47,9 +47,6 @@ public class ImagemProduto implements Serializable {
 	foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "empresa_id_fk"))
 	private PessoaJuridica empresa;
 	
-	
-	
-	
 
 	public PessoaJuridica getEmpresa() {
 		return empresa;

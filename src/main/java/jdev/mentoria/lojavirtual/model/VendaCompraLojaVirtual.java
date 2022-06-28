@@ -2,18 +2,22 @@ package jdev.mentoria.lojavirtual.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -100,6 +104,17 @@ public class VendaCompraLojaVirtual implements Serializable {
 	private PessoaJuridica empresa;
 	
 	
+	@OneToMany(mappedBy = "vendaCompraLojaVirtual", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<ItemVendaLoja> itemVendaLojas = new ArrayList<ItemVendaLoja>();
+	
+	
+	public void setItemVendaLojas(List<ItemVendaLoja> itemVendaLojas) {
+		this.itemVendaLojas = itemVendaLojas;
+	}
+	
+	public List<ItemVendaLoja> getItemVendaLojas() {
+		return itemVendaLojas;
+	}
 
 	public PessoaJuridica getEmpresa() {
 		return empresa;

@@ -11,5 +11,7 @@ import jdev.mentoria.lojavirtual.model.VendaCompraLojaVirtual;
 public interface Vd_Cp_Loja_virt_repository extends JpaRepository<VendaCompraLojaVirtual, Long> {
 	
 	
+	
+	
 
 }

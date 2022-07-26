@@ -189,6 +189,7 @@ public class Vd_Cp_loja_Virt_Controller {
 	}
 	
 	
+	
 	@ResponseBody
 	@GetMapping(value = "**/consultaVendaDinamicaFaixaData/{data1}/{data2}")
 	public ResponseEntity<List<VendaCompraLojaVirtualDTO>> 
@@ -197,6 +198,7 @@ public class Vd_Cp_loja_Virt_Controller {
 	                            		@PathVariable("data2") String data2) throws ParseException{
 		
 		List<VendaCompraLojaVirtual> compraLojaVirtual = null;
+		
 		
 		compraLojaVirtual = vendaService.consultaVendaFaixaData(data1, data2);
 		

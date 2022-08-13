@@ -17,13 +17,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jdev.mentoria.lojavirtual.ExceptionMentoriaJava;
 import jdev.mentoria.lojavirtual.model.NotaFiscalCompra;
+import jdev.mentoria.lojavirtual.model.NotaFiscalVenda;
 import jdev.mentoria.lojavirtual.repository.NotaFiscalCompraRepository;
+import jdev.mentoria.lojavirtual.repository.NotaFiscalVendaRepository;
 
 @RestController
 public class NotaFiscalCompraController {
 	
 	@Autowired
 	private NotaFiscalCompraRepository notaFiscalCompraRepository;
+	
+	@Autowired
+	private NotaFiscalVendaRepository notaFiscalVendaRepository;
 	
 	
 	
@@ -88,6 +93,36 @@ public class NotaFiscalCompraController {
 		}
 		
 		return new ResponseEntity<NotaFiscalCompra>(notaFiscalCompra, HttpStatus.OK);
+	}
+	
+	
+	
+	
+	@ResponseBody
+	@GetMapping(value = "**/obterNotaFiscalCompraDaVenda/{idvenda}")
+	public ResponseEntity<List<NotaFiscalVenda>> obterNotaFiscalCompraDaVenda(@PathVariable("idvenda") Long idvenda) throws ExceptionMentoriaJava { 
+		
+		List<NotaFiscalVenda> notaFiscalCompra = notaFiscalVendaRepository.buscaNotaPorVenda(idvenda);
+		
+		if (notaFiscalCompra == null) {
+			throw new ExceptionMentoriaJava("Não encontrou Nota Fiscal de venda com código da venda: " + idvenda);
+		}
+		
+		return new ResponseEntity<List<NotaFiscalVenda>>(notaFiscalCompra, HttpStatus.OK);
+	}
+	
+	
+	@ResponseBody
+	@GetMapping(value = "**/obterNotaFiscalCompraDaVendaUnico/{idvenda}")
+	public ResponseEntity<NotaFiscalVenda> obterNotaFiscalCompraDaVendaUnico(@PathVariable("idvenda") Long idvenda) throws ExceptionMentoriaJava { 
+		
+		NotaFiscalVenda notaFiscalCompra = notaFiscalVendaRepository.buscaNotaPorVendaUnica(idvenda);
+		
+		if (notaFiscalCompra == null) {
+			throw new ExceptionMentoriaJava("Não encontrou Nota Fiscal de venda com código da venda: " + idvenda);
+		}
+		
+		return new ResponseEntity<NotaFiscalVenda>(notaFiscalCompra, HttpStatus.OK);
 	}
 	
 	

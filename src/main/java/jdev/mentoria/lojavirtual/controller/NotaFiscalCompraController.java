@@ -34,7 +34,7 @@ public class NotaFiscalCompraController {
 	
 	@ResponseBody 
 	@PostMapping(value = "**/salvarNotaFiscalCompra")
-	public ResponseEntity<NotaFiscalCompra> salvarMarca(@RequestBody @Valid NotaFiscalCompra notaFiscalCompra) throws ExceptionMentoriaJava { /*Recebe o JSON e converte pra Objeto*/
+	public ResponseEntity<NotaFiscalCompra> salvarNotaFiscalCompra(@RequestBody @Valid NotaFiscalCompra notaFiscalCompra) throws ExceptionMentoriaJava { /*Recebe o JSON e converte pra Objeto*/
 		
 		if (notaFiscalCompra.getId() == null) {
 		  

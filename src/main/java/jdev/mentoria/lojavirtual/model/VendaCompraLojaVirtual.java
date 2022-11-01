@@ -44,7 +44,7 @@ public class VendaCompraLojaVirtual implements Serializable {
 	private Long id;
 
 	@NotNull(message = "A pessoa compradora deve ser informado")
-	@ManyToOne(targetEntity = PessoaFisica.class,cascade = CascadeType.ALL)
+	@ManyToOne(targetEntity = PessoaFisica.class, cascade = CascadeType.ALL)
 	@JoinColumn(name = "pessoa_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "pessoa_fk"))
 	private PessoaFisica pessoa;
 
@@ -55,7 +55,7 @@ public class VendaCompraLojaVirtual implements Serializable {
 
 	@NotNull(message = "O endereço de cobrança deve ser informado")
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "endereco_cobranca_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "endereco_cobranca_fk") )
+	@JoinColumn(name = "endereco_cobranca_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "endereco_cobranca_fk"))
 	private Endereco enderecoCobranca;
 
 	@Min(value = 1, message = "Valor total da venda é invalida")
@@ -75,7 +75,6 @@ public class VendaCompraLojaVirtual implements Serializable {
 	@JoinColumn(name = "nota_fiscal_venda_id", nullable = true, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "nota_fiscal_venda_fk"))
 	private NotaFiscalVenda notaFiscalVenda;
 
-	
 	@ManyToOne
 	@JoinColumn(name = "cupom_desc_id", foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "cupom_desc_fk"))
 	private CupDesc cupDesc;
@@ -98,39 +97,79 @@ public class VendaCompraLojaVirtual implements Serializable {
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date dataEntrega;
-	
-	
+
 	@NotNull(message = "A empresa dona do registro deve ser informada")
 	@ManyToOne(targetEntity = PessoaJuridica.class)
-	@JoinColumn(name = "empresa_id", nullable = false, 
-	foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "empresa_id_fk"))
+	@JoinColumn(name = "empresa_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "empresa_id_fk"))
 	private PessoaJuridica empresa;
-	
+
 	@NotNull(message = "Status da venda ou compra deve ser informado")
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private StatusVendaLojaVirtual statusVendaLojaVirtual;
-	
-	
+
 	@OneToMany(mappedBy = "vendaCompraLojaVirtual", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<ItemVendaLoja> itemVendaLojas = new ArrayList<ItemVendaLoja>();
-	
-	
+
+	@Column(name = "codigo_etiqueta")
+	private String codigoEtiqueta;
+
+	@Column(name = "url_imprime_etiqueta")
+	private String urlImprimeEtiqueta;
+
+	/* Frete que foi escolhido pelo cliente no momento da compra */
+	private String servicoTransportadora;
+
+	public StatusVendaLojaVirtual getStatusVendaLojaVirtual() {
+		return statusVendaLojaVirtual;
+	}
+
+	public void setStatusVendaLojaVirtual(StatusVendaLojaVirtual statusVendaLojaVirtual) {
+		this.statusVendaLojaVirtual = statusVendaLojaVirtual;
+	}
+
+	public String getCodigoEtiqueta() {
+		return codigoEtiqueta;
+	}
+
+	public void setCodigoEtiqueta(String codigoEtiqueta) {
+		this.codigoEtiqueta = codigoEtiqueta;
+	}
+
+	public String getUrlImprimeEtiqueta() {
+		return urlImprimeEtiqueta;
+	}
+
+	public void setUrlImprimeEtiqueta(String urlImprimeEtiqueta) {
+		this.urlImprimeEtiqueta = urlImprimeEtiqueta;
+	}
+
+	public String getServicoTransportadora() {
+		return servicoTransportadora;
+	}
+
+	public void setServicoTransportadora(String servicoTransportadora) {
+		this.servicoTransportadora = servicoTransportadora;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	private Boolean excluido = Boolean.FALSE;
-	
+
 	public void setExcluido(Boolean excluido) {
 		this.excluido = excluido;
 	}
-	
+
 	public Boolean getExcluido() {
 		return excluido;
 	}
-	
-	
+
 	public void setItemVendaLojas(List<ItemVendaLoja> itemVendaLojas) {
 		this.itemVendaLojas = itemVendaLojas;
 	}
-	
+
 	public List<ItemVendaLoja> getItemVendaLojas() {
 		return itemVendaLojas;
 	}

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import jdev.mentoria.lojavirtual.model.VendaCompraLojaVirtual;
@@ -72,7 +73,6 @@ public interface Vd_Cp_Loja_virt_repository extends JpaRepository<VendaCompraLoj
 			+ " and i.vendaCompraLojaVirtual.dataVenda <= ?2 ")
 	List<VendaCompraLojaVirtual> consultaVendaFaixaData(Date data1, Date data2);
 
-	
 	@Modifying(flushAutomatically = true)
 	@Query(nativeQuery = true, value = "update vd_cp_loja_virt set codigo_etiqueta = ?1 where id = ?2")
 	void updateEtiqueta(String idEtiqueta, Long idVenda);

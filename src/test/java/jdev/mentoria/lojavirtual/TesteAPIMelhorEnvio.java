@@ -21,14 +21,14 @@ public class TesteAPIMelhorEnvio {
 		
 		OkHttpClient client = new OkHttpClient().newBuilder()
 				  .build();
-				MediaType mediaType = MediaType.parse("text/plain");
-				RequestBody body = RequestBody.create(mediaType, "");
+				MediaType mediaType = MediaType.parse("application/json");
+				RequestBody body = RequestBody.create(mediaType, "{\n    \"orders\": [\n        \"a54d16ed-1a73-4625-b73f-fb24833b9fb6\"\n    ]\n}");
 				Request request = new Request.Builder()
-				  .url(ApiTokenIntegracao.URL_MELHOR_ENVIO_SAND_BOX +"api/v2/me/shipment/agencies")
-				  .method("GET", body)
-				  .addHeader("Authorization", "Bearer " + ApiTokenIntegracao.TOKEN_MELHOR_ENVIO_SAND_BOX)
+				  .url(ApiTokenIntegracao.URL_MELHOR_ENVIO_SAND_BOX+ "api/v2/me/shipment/tracking")
+				  .method("POST", body)
 				  .addHeader("Accept", "application/json")
 				  .addHeader("Content-Type", "application/json")
+				  .addHeader("Authorization", "Bearer " +  ApiTokenIntegracao.TOKEN_MELHOR_ENVIO_SAND_BOX)
 				  .addHeader("User-Agent", "suporte@jdevtreinamento.com.br")
 				  .build();
 				

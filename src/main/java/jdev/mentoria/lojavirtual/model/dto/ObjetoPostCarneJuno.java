@@ -23,6 +23,38 @@ public class ObjetoPostCarneJuno implements Serializable {
 
 	/* Referncia para produto da loja ou codigo do produto */
 	private String reference;
+	
+	private String payerCpfCnpj;
+	
+	private String email;
+	
+	private Long idVenda;
+	
+	public void setIdVenda(Long idVenda) {
+		this.idVenda = idVenda;
+	}
+	
+	public Long getIdVenda() {
+		return idVenda;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
+	
+	public String getEmail() {
+		return email;
+	}
+	
+	public void setPayerCpfCnpj(String payerCpfCnpj) {
+		this.payerCpfCnpj = payerCpfCnpj;
+	}
+	
+	public String getPayerCpfCnpj() {
+		return payerCpfCnpj;
+	}
 
 	public String getDescription() {
 		return description;

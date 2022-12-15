@@ -6,7 +6,7 @@ public class Billing implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private String nome;
+	private String name;
 	private String document;
 	private String email;
 
@@ -14,12 +14,12 @@ public class Billing implements Serializable {
 
 	private boolean notify = true;
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String nome) {
+		this.name = nome;
 	}
 
 	public String getDocument() {

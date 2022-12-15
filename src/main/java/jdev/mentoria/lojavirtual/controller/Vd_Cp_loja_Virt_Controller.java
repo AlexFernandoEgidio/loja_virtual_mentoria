@@ -40,6 +40,7 @@ import jdev.mentoria.lojavirtual.model.dto.ConsultaFreteDTO;
 import jdev.mentoria.lojavirtual.model.dto.EmpresaTransporteDTO;
 import jdev.mentoria.lojavirtual.model.dto.EnvioEtiquetaDTO;
 import jdev.mentoria.lojavirtual.model.dto.ItemVendaDTO;
+import jdev.mentoria.lojavirtual.model.dto.ObjetoPostCarneJuno;
 import jdev.mentoria.lojavirtual.model.dto.ProductsEnvioEtiquetaDTO;
 import jdev.mentoria.lojavirtual.model.dto.TagsEnvioDto;
 import jdev.mentoria.lojavirtual.model.dto.VendaCompraLojaVirtualDTO;
@@ -49,6 +50,7 @@ import jdev.mentoria.lojavirtual.repository.EnderecoRepository;
 import jdev.mentoria.lojavirtual.repository.NotaFiscalVendaRepository;
 import jdev.mentoria.lojavirtual.repository.StatusRastreioRepository;
 import jdev.mentoria.lojavirtual.repository.Vd_Cp_Loja_virt_repository;
+import jdev.mentoria.lojavirtual.service.ServiceJunoBoleto;
 import jdev.mentoria.lojavirtual.service.ServiceSendEmail;
 import jdev.mentoria.lojavirtual.service.VendaService;
 import okhttp3.MediaType;
@@ -86,6 +88,8 @@ public class Vd_Cp_loja_Virt_Controller {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	@Autowired
+	private ServiceJunoBoleto serviceJunoBoleto;
 
 	@ResponseBody
 	@PostMapping(value = "**/salvarVendaLoja")
@@ -726,6 +730,11 @@ public class Vd_Cp_loja_Virt_Controller {
 		
 	}
 	
+	@ResponseBody
+	@PostMapping(value = "**/gerarBoletoPix")
+	public ResponseEntity<String> gerarBoletoPix(@RequestBody @Valid ObjetoPostCarneJuno objetoPostCarneJuno) throws Exception{
+		return  new ResponseEntity<String>(serviceJunoBoleto.gerarCarneApi(objetoPostCarneJuno), HttpStatus.OK);
+	}
 	
 	
 	@ResponseBody

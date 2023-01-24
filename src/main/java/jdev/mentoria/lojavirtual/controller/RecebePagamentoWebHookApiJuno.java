@@ -44,6 +44,7 @@ public class RecebePagamentoWebHookApiJuno implements Serializable {
 			 if (boletoJuno != null && !boletoJuno.isQuitado() && boletoPago) {
 				 
 				 boletoJunoRepository.quitarBoletoById(boletoJuno.getId());
+				 System.out.println("Boleto: " + boletoJuno.getCode() + " foi quitado ");
 				 
 			 }
 		}

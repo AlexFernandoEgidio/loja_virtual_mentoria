@@ -14,6 +14,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @SpringBootApplication
 @EnableAsync
@@ -22,7 +26,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan(basePackages = {"jdev.*"})
 @EnableJpaRepositories(basePackages = {"jdev.mentoria.lojavirtual.repository"})
 @EnableTransactionManagement
-public class LojaVirtualMentoriaApplication implements AsyncConfigurer {
+@EnableWebMvc
+public class LojaVirtualMentoriaApplication implements AsyncConfigurer, WebMvcConfigurer {
 
 	public static void main(String[] args) {
 		
@@ -30,6 +35,17 @@ public class LojaVirtualMentoriaApplication implements AsyncConfigurer {
 		
 		
 		SpringApplication.run(LojaVirtualMentoriaApplication.class, args);
+	}
+	
+	@Bean
+	public ViewResolver  viewResolver() {
+		
+		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+		
+		viewResolver.setPrefix("classpath:templates/");
+		viewResolver.setSuffix(".html");
+		
+		return viewResolver;
 	}
 	
 	
